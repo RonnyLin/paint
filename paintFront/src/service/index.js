@@ -4,10 +4,7 @@ import router from '@/router'
 import { Message } from 'element-ui';
 import jsonParse from '@/jsonParse'
 
-const apiURL = 'http://192.168.16.181:9000';
-const server_id = 'WSPROD';
-// const server_id = '0';
-
+const apiURL = 'http://localhost:3000';
 
 class api {
 	    constructor() {}

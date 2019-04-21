@@ -4,17 +4,12 @@
  */
 
 import axios from 'axios'
-import store from '@/vuex/store'
-import router from '@/router'
 import jsonParse from '@/jsonParse'
 
 // axios 配置
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = '';
-// console.log(JSON.parse(sessionStorage.user) sessionStorage.user,11111111111)
-// console.log(sessionStorage.user,sessionStorage)
 
- //axios.defaults.headers.common['Authorization'] = 'Basic anN5OkFiMTIzNDU2';
 
 // http request 拦截器
 axios.interceptors.request.use(

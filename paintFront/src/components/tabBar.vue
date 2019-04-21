@@ -1,19 +1,48 @@
 <template>
-  <div class="hello">
-
-  </div>
+  <mt-tabbar v-model="selectedIndex" fixed="fixed">
+    <mt-tab-item  v-for="(item) in items" :key="item.text" :id="item.id" v-on:click="select(item)">
+        <img slot="icon" v-show = "selectedIndex === item.id" :src="item.selectedUrl" />
+        <img slot="icon" v-show = "selectedIndex !== item.id" :src="item.imgUrl" />
+        {{ item.text }}
+    </mt-tab-item>
+  </mt-tabbar>
 </template>
 
 <script>
-
+let me;
 export default {
-  name: 'HelloWorld',
+  name: 'tabBar',
+  data(){
+    return {
+        fixed:'fixed',
+        selectedIndex:'',
+    }
+  },
   props: {
-    msg: String
+    items: {
+        type: Array ,
+    },
+    selected:{
+      type: String,
+      default:'room'
+    }
+  },
+  computed:{
+  },
+  methods:{
+
   },
   created(){
-      console.error($);
-      alert($);
+      me = this;
+      me.selectedIndex  = me.selected;
+  },
+  watch:{
+      selectedIndex:(newIndex, oldIndex)=>{
+          me.$router.push({name:newIndex})
+      }
+  },
+  mounted(){
+
   }
 }
 </script>
