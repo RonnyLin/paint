@@ -13,8 +13,8 @@ function md5Pwd(pwd) {
 }
 
 router.get('/list', function(req, res, next) {
-    const { type } = req.query;
-    User.find({type},(err,doc)=>{
+    // const { type } = req.query;
+    User.find({},(err,doc)=>{
         res.json({
             code:0,
             data:doc
@@ -93,7 +93,6 @@ router.post('/update',(req,res,next)=>{
 //注册
 router.post('/register', function(req, res, next) {
     const {user,pwd} = req.body;
-
     User.findOne({user:user},(err,doc)=>{
         if(doc){
            return res.json({

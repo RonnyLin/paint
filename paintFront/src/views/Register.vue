@@ -1,11 +1,11 @@
 <template>
   <div class="login">
     <div>
-    <mt-field label="用户名" placeholder="请输入用户名" v-model="username" :state="usernameStatus"></mt-field>
-    <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password" :state="passwordStatus"></mt-field>
+    <mt-field label="用户名" placeholder="请输入用户名" v-model="username" ></mt-field>
+    <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"  ></mt-field>
+    <mt-field label="重复密码" placeholder="请重复密码" type="password" v-model="repassword" ></mt-field>
     </div>
-    <mt-button type="primary"  size="normal" @click="login">登录</mt-button>
-    <mt-button type="default" size="normal" @click="register">免费注册</mt-button>
+    <mt-button type="default" size="normal" @click="register">注册</mt-button>
   </div>
 </template>
 <script>
@@ -19,29 +19,38 @@
           return{
               username: '',
               password: '',
-              usernameStatus:'',
-              passwordStatus:''
+              repassword:'',
           }
       },
       methods:{
-          login(){
-              if( !this.username && !this.password){
-                  this.usernameStatus = 'warning';
-                  this.passwordStatus = 'warning';
+          register(){
+              let me = this;
+              if( !this.username || !this.password || !this.repassword){
+                  this._MessageBox(
+                      {   message: '账号密码不能为空',
+                          type: 'error',
+                          duration:2000
+                      })
                   return
-              }else if(!this.username){
-                  return this.usernameStatus = 'warning'
-              }else if(!this.password){
-                  return this.passwordStatus = 'warning'
               }
+
+              if(this.password !== this.repassword){
+                  this.password = ''
+                  this.repassword =''
+                  this._MessageBox(
+                      {   message: '两次输入的密码要一致',
+                          type: 'error',
+                          duration:2000
+                      })
+                  return;
+              }
+
               let params = {
                   username: this.username,
                   password: this.password,
               }
-              console.error(params)
-              api.login(params).then((res)=>{
-                  console.error(this);
-                  console.error(res);
+
+              api.register(params).then((res)=>{
                   if(res && res.code === 1){
                       this._MessageBox(
                           {   message:res.msg || '请求失败，内部服务器错误！',
@@ -50,11 +59,14 @@
                           })
                       return;
                   }
+                  this._MessageBox(
+                      {   message: '注册成功',
+                          type: 'success',
+                          duration:2000
+                      })
+                  me.$router.go(-1);
               })
           },
-          register(){
-
-          }
       }
   }
 </script>

@@ -1,17 +1,40 @@
 <template>
   <div class="home">
-    <h1>This is an about message</h1>
+    <user-list :user-list="userList"></user-list>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import api from '@/service/index'
+import UserList from '@/components/Message/UserList.vue'
 
 export default {
-  name: 'home',
+  name: 'message',
+  data(){
+      return{
+        userList:[]
+      }
+  },
+  beforeCreate:function () {
+      let me = this;
+      api.user_list().then( res =>{
+          if(res.code === 0){
+              console.error(res.data)
+              me.userList = res.data
+          }
+      })
+  },
+  created:function () {
+      console.error(this)
+
+  },
+
+  mounted:function () {
+      console.error(this)
+
+  },
   components: {
-    HelloWorld
+    'user-list':UserList
   }
 }
 </script>

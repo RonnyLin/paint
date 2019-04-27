@@ -13,11 +13,12 @@ class api {
 		return login(apiURL + `/users/login`, param);
 	}
 
-	item_list(pid, key = '', ext = '') {
-		if (!pid) {
-			pid = '0';
-		}
-		return baseRequest('get', apiURL + `/v2/api/item?pid=${pid}&key=${encodeURI(key)}&ext=${ext}`);
+    register( param ){
+        return login(apiURL + `/users/register`, param);
+    }
+
+	user_list( ) {
+		return baseRequest('get', apiURL + `/users/list`);
 	}
 
 	recovery(_ids, same_files) {
@@ -30,8 +31,8 @@ let login = (url, params) =>{
   let base = axios ;
 
   let setData = {
-    username: params.username,
-    password: params.password
+      user: params.username,
+      pwd: params.password
   }
 
   return base['post'](url, setData).then(success).catch(error);
