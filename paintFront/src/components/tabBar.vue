@@ -1,6 +1,6 @@
 <template>
   <mt-tabbar v-model="selectedIndex" fixed="fixed">
-    <mt-tab-item  v-for="(item) in items" :key="item.text" :id="item.id" v-on:click="select(item)">
+    <mt-tab-item  v-for="(item) in items" :key="item.text" :id="item.id" >
         <img slot="icon" v-show = "selectedIndex === item.id" :src="item.selectedUrl" />
         <img slot="icon" v-show = "selectedIndex !== item.id" :src="item.imgUrl" />
         {{ item.text }}
@@ -24,7 +24,7 @@ export default {
     },
     selected:{
       type: String,
-      default:'room'
+      default:'main'
     }
   },
   computed:{

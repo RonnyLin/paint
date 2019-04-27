@@ -4,7 +4,7 @@
  */
 
 import axios from 'axios'
-import jsonParse from '@/jsonParse'
+// import jsonParse from '@/jsonParse'
 
 // axios 配置
 axios.defaults.timeout = 5000;
@@ -15,7 +15,7 @@ axios.defaults.baseURL = '';
 axios.interceptors.request.use(
     config => {
         if (sessionStorage.user) {
-             config.headers.authorization = `Basic ${jsonParse.parse(sessionStorage.user).authorization }`;
+             // config.headers.authorization = `Basic ${jsonParse.parse(sessionStorage.user).authorization }`;
         }
         return config;
     },

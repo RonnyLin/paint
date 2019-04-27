@@ -8,11 +8,7 @@ import jquery from 'jquery'
 window.jquery = window.$ = jquery
 
 /* 引入组件 */
-import { Tabbar, TabItem } from 'mint-ui';
-
-
-Vue.component('mt-tabbar', Tabbar)
-Vue.component('mt-tab-item', TabItem)
+import '@/utils/mint-ui.js'
 
 
 Vue.config.productionTip = false
