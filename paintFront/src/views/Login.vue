@@ -48,11 +48,10 @@
                   let user = res.data
                   sessionStorage.setItem('user', JSON.stringify(user));
                   this.$router.push({ name: 'main' })
-
               })
           },
           register(){
-              this.$router.push({name:'register'})
+              this.$router.push({ name: 'register' })
           },
 
       }

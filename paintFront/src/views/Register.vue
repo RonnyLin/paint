@@ -10,7 +10,6 @@
 </template>
 <script>
   'use strict'
-
   import api from '@/service/index'
 
   export default{
