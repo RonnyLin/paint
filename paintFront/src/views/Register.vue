@@ -1,11 +1,16 @@
 <template>
   <div class="login">
-    <div>
-    <mt-field label="用户名" placeholder="请输入用户名" v-model="username" ></mt-field>
-    <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"  ></mt-field>
-    <mt-field label="重复密码" placeholder="请重复密码" type="password" v-model="repassword" ></mt-field>
-    </div>
-    <mt-button type="default" size="normal" @click="register">注册</mt-button>
+      <mt-header title="注册用户">
+        <router-link to="/" slot="left">
+          <mt-button icon="back"></mt-button>
+        </router-link>
+      </mt-header>
+      <div>
+        <mt-field label="用户名" placeholder="请输入用户名" v-model="username" ></mt-field>
+        <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"  ></mt-field>
+        <mt-field label="重复密码" placeholder="请重复密码" type="password" v-model="repassword" ></mt-field>
+      </div>
+      <mt-button style="margin-top: 10px;width: 100%" type="default" size="normal" @click="register">注册</mt-button>
   </div>
 </template>
 <script>
@@ -59,9 +64,9 @@
                       return;
                   }
                   this._MessageBox(
-                      {   message: '注册成功',
+                      {   message: '注册成功，正在跳转',
                           type: 'success',
-                          duration:2000
+                          duration:5000
                       })
                   me.$router.go(-1);
               })
@@ -75,7 +80,7 @@
     height: 100%;
   }
   .mint-button{
-    width: 100%;
-    margin-top: 10px;
+    /*width: 100%;*/
+    /*margin-top: 10px;*/
   }
 </style>

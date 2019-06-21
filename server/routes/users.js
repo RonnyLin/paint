@@ -77,7 +77,6 @@ router.post('/update',(req,res,next)=>{
    };
    let body = req.body.data;
    User.findByIdAndUpdate(userid,body,(err,doc)=>{
-
        const data = Object.assign({},{
            user:doc.user,
            type:doc.type,
@@ -100,7 +99,7 @@ router.post('/register', function(req, res, next) {
                 msg:'用户名已存在'
             })
         }
-        const userModal = new User({user,pwd:md5Pwd(pwd)});
+        const userModal = new User({ user, pwd: md5Pwd( pwd ), loginNum: 0});
         userModal.save((err,doc)=>{
             if (err){
                 return res.json({
@@ -108,11 +107,12 @@ router.post('/register', function(req, res, next) {
                     msg:'后台出错了'
                 })
             };
-            const {user,_id} = doc
+            // 返回前端的字段
+            const { user, _id, loginNum } = doc
             res.cookie('userid',doc._id);
             res.json({
-                code:0,
-                data:{user,_id}
+                code: 0,
+                data:{user, _id, loginNum}
             })
         });
     })
@@ -120,15 +120,18 @@ router.post('/register', function(req, res, next) {
 
 //登录
 router.post('/login',(req,res,next)=>{
-   const {user,pwd} = req.body;
-   User.findOne({user,pwd:md5Pwd(pwd)},_filter,(err,doc)=>{
+   const { user, pwd } = req.body;
+   User.findOne({user,pwd: md5Pwd(pwd)}, _filter, (err,doc)=>{
        if(!doc){
           return res.json({
                code:1,
                msg:'用户名或密码错误'
            })
        }else{
-
+           let loginNum = doc.loginNum
+           User.update({ _id: doc._id }, { $set: { loginNum: loginNum++ }}, function( doc ){
+               console.error(doc)
+           });
            res.cookie('userid',doc._id)
            res.json({
                code:0,

@@ -16,6 +16,8 @@ const models = {
         'title':String,
         'company':String,
         'score':String,
+        // 登录次数
+        'loginNum': Number
     },
     chat:{
         'chatid':{type:String,require:true},

@@ -47,7 +47,12 @@
                   }
                   let user = res.data
                   sessionStorage.setItem('user', JSON.stringify(user));
-                  this.$router.push({ name: 'main' })
+                  // 如果是首次登陆 先完善信息
+                  if(user.loginNum === 0){
+                    this.$router.push({ name: 'userInfo' })
+                  }else{
+                    this.$router.push({ name: 'main' })
+                  }
               })
           },
           register(){

@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import '@/assets/css/index.css'
 import './registerServiceWorker'
-
 
 import jquery from 'jquery'
 window.jquery = window.$ = jquery
@@ -14,9 +14,19 @@ import jsonParse from '@/utils/jsonParse.js'
 /* 引入组件 */
 import '@/utils/mint-ui.js'
 
+//引入nprogress
+import NProgress from 'nprogress' // 进度条
+import 'nprogress/nprogress.css' //这个样式必须引入
+
+// 简单配置
+NProgress.inc(0.2)
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false })
+
+// 白名单
 const whiteList = ['/login', '/register']
+
 router.beforeEach((to,from,next)=>{
-    console.error( to)
+    NProgress.start()
     if (whiteList.indexOf(to.path) !== -1) {
         sessionStorage.removeItem('user');
         next()
@@ -32,7 +42,9 @@ router.beforeEach((to,from,next)=>{
     }
 });
 
-document.cookie
+router.afterEach(() => {
+    NProgress.done()
+})
 
 Vue.config.productionTip = false
 
