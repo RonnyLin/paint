@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "mint-ui": "^2.2.13",
     "nprogress": "^0.2.0",
     "register-service-worker": "^1.6.2",
